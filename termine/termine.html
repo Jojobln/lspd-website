@@ -11,103 +11,204 @@
       background-color: #111;
       color: #fff;
     }
-    
+
     .header {
       background-color: #0a0a0a;
       padding: 20px;
       display: flex;
       align-items: center;
       justify-content: space-between;
+      position: relative;
     }
-    
+
     .logo-text {
       font-size: 22px;
       color: #00aaff;
     }
-    
+
     .hamburger {
-      font-size: 26px;
+      font-size: 28px;
       color: #fff;
       cursor: pointer;
+      user-select: none;
+      z-index: 101;
     }
-    
-    .nav-menu {
+
+    nav.nav-menu {
       background-color: #1a1a1a;
-      padding: 10px;
+      position: absolute;
+      top: 100%;
+      right: 0;
+      width: 220px;
+      border-radius: 0 0 8px 8px;
+      overflow: hidden;
+      max-height: 0;
+      transition: max-height 0.3s ease-out;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.7);
+      z-index: 100;
     }
-    
-    .hidden {
-      display: none;
+
+    nav.nav-menu.open {
+      max-height: 1000px;
+      transition: max-height 0.5s ease-in;
     }
-    
+
     .nav-links {
       list-style: none;
-      padding: 0;
+      padding: 10px 0;
       margin: 0;
     }
-    
+
     .nav-links li {
-      margin: 10px 0;
+      margin: 0;
     }
-    
+
     .nav-links a {
+      display: block;
+      padding: 12px 20px;
       color: #00aaff;
       text-decoration: none;
+      font-weight: bold;
+      border-bottom: 1px solid #222;
+      transition: background-color 0.2s ease;
     }
-    
+
     .nav-links a:hover {
-      text-decoration: underline;
+      background-color: #003f5c;
+      text-decoration: none;
     }
-    
+
+    @media (min-width: 768px) {
+      .hamburger {
+        display: none;
+      }
+
+      nav.nav-menu {
+        position: static;
+        max-height: none !important;
+        background: none;
+        width: auto;
+        box-shadow: none;
+        border-radius: 0;
+      }
+
+      .nav-links {
+        display: flex;
+        gap: 25px;
+        padding: 0;
+      }
+
+      .nav-links li {
+        margin: 0;
+      }
+
+      .nav-links a {
+        padding: 0;
+        border: none;
+      }
+
+      .nav-links a:hover {
+        background: none;
+        text-decoration: underline;
+      }
+    }
+
     .content-section {
       padding: 30px 20px;
+      max-width: 900px;
+      margin: 0 auto;
     }
-    
-    .division {
-      background-color: #1e1e1e;
-      border: 1px solid #333;
-      padding: 20px;
-      margin-bottom: 20px;
-      border-radius: 8px;
-    }
-    
-    .division h3 {
-      margin-top: 0;
-      color: #00aaff;
-    }
-    
-    .division p {
+
+    #login-area input[type="text"],
+    #login-area input[type="password"],
+    #event-form input[type="date"],
+    #event-form input[type="time"],
+    #event-form input[type="text"] {
+      display: block;
+      width: 100%;
+      max-width: 300px;
+      margin: 8px 0 15px 0;
+      padding: 8px;
+      border-radius: 4px;
+      border: none;
       font-size: 16px;
-      line-height: 1.6;
+    }
+
+    #login-area button,
+    #event-form button {
+      background-color: #00aaff;
+      color: #fff;
+      border: none;
+      padding: 10px 20px;
+      font-weight: bold;
+      border-radius: 4px;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+
+    #login-area button:hover,
+    #event-form button:hover {
+      background-color: #0088cc;
+    }
+
+    #event-list {
+      list-style: none;
+      padding-left: 0;
+      margin-top: 20px;
       color: #fff;
     }
-    
+
+    #event-list li {
+      padding: 10px 15px;
+      background-color: #222;
+      margin-bottom: 10px;
+      border-radius: 6px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 16px;
+    }
+
+    #event-list button {
+      background-color: #cc3300;
+      border: none;
+      color: white;
+      padding: 5px 10px;
+      border-radius: 4px;
+      cursor: pointer;
+      font-weight: bold;
+      transition: background-color 0.3s ease;
+    }
+
+    #event-list button:hover {
+      background-color: #aa2200;
+    }
+
     .footer {
       text-align: center;
       padding: 20px;
       background-color: #0a0a0a;
       color: #777;
+      margin-top: 40px;
     }
   </style>
 </head>
 <body>
 
   <header class="header">
-    <div class="container nav-container">
-      <h1 class="logo-text">Los Santos Police Department</h1>
-      <div class="hamburger" onclick="toggleMenu()">&#9776;</div>
-      <nav id="nav-menu" class="nav-menu hidden">
-        <ul class="nav-links">
-          <li><a href="uniformen/uniformen.html">Uniformen</a></li>
-          <li><a href="fahrzeuge/fahrzeuge.html">Fahrzeuge</a></li>
-          <li><a href="vorschriften/vorschriften.html">Dienstvorschrift</a></li>
-          <li><a href="raenge/raenge.html">Ränge</a></li>
-          <li><a href="divisions/divisions.html">Divisions</a></li>
-          <li><a href="index.html">Startseite</a></li>
-          <li><a href="news/news.html">News</a></li>
-        </ul>
-      </nav>
-    </div>
+    <h1 class="logo-text">Los Santos Police Department</h1>
+    <div class="hamburger" id="hamburger">&#9776;</div>
+    <nav id="nav-menu" class="nav-menu">
+      <ul class="nav-links">
+        <li><a href="/lspd-website/uniformen/uniformen.html">Uniformen</a></li>
+        <li><a href="/lspd-website/fahrzeuge/fahrzeuge.html">Fahrzeuge</a></li>
+        <li><a href="/lspd-website/vorschriften/vorschriften.html">Dienstvorschrift</a></li>
+        <li><a href="/lspd-website/raenge/raenge.html">Ränge</a></li>
+        <li><a href="/lspd-website/divisions/divisions.html">Divisions</a></li>
+        <li><a href="/lspd-website/termine/termine.html">Termine</a></li>
+        <li><a href="/lspd-website/index.html">Startseite</a></li>
+      </ul>
+    </nav>
   </header>
 
   <section class="content-section">
@@ -123,7 +224,7 @@
     </div>
 
     <!-- Termine nur sichtbar nach Login -->
-    <div id="protected-content" style="display:none;">
+    <div id="protected-content" style="display:none; margin-top: 20px;">
       <form id="event-form">
         <label for="date">Datum:</label>
         <input type="date" id="date" required />
@@ -147,7 +248,6 @@
   </footer>
 
   <script>
-    // Benutzer mit Username + Passwort
     const users = {
       "kuura": "chief123",
       "pringle": "metro2025",
@@ -156,11 +256,22 @@
 
     let loggedInUser = null;
 
-    function toggleMenu() {
-      document.getElementById("nav-menu").classList.toggle("hidden");
-    }
+    const hamburger = document.getElementById('hamburger');
+    const navMenu = document.getElementById('nav-menu');
 
-    // Login prüfen
+    hamburger.addEventListener('click', () => {
+      navMenu.classList.toggle('open');
+    });
+
+    // Beim Klick auf Menülink bei kleinen Bildschirmen Menü schließen
+    document.querySelectorAll('.nav-links a').forEach(link => {
+      link.addEventListener('click', () => {
+        if(window.innerWidth < 768) {
+          navMenu.classList.remove('open');
+        }
+      });
+    });
+
     function checkLogin() {
       const username = document.getElementById("usernameInput").value.trim().toLowerCase();
       const password = document.getElementById("passwordInput").value;
@@ -177,10 +288,8 @@
       }
     }
 
-    // Termine speichern (localStorage)
     let events = JSON.parse(localStorage.getItem("lspdEvents")) || [];
 
-    // Event-Formular
     const form = document.getElementById("event-form");
     const eventList = document.getElementById("event-list");
 
@@ -203,7 +312,6 @@
       renderEvents();
     });
 
-    // Termine anzeigen
     function renderEvents() {
       eventList.innerHTML = "";
 
@@ -218,20 +326,17 @@
           const li = document.createElement("li");
           li.textContent = `${ev.date} ${ev.time} – ${ev.eventDesc}`;
 
-          // Wenn eingeloggt, Löschen-Button hinzufügen
           if (loggedInUser) {
             const delBtn = document.createElement("button");
             delBtn.textContent = "Löschen";
-            delBtn.style.marginLeft = "10px";
-            delBtn.style.cursor = "pointer";
             delBtn.onclick = () => deleteEvent(ev.id);
             li.appendChild(delBtn);
           }
+
           eventList.appendChild(li);
         });
     }
 
-    // Termin löschen
     function deleteEvent(id) {
       if (!loggedInUser) return;
       events = events.filter(ev => ev.id !== id);
@@ -239,7 +344,7 @@
       renderEvents();
     }
 
-    // Termine auch vor Login anzeigen (ohne Löschen)
+    // Termine auch vor Login anzeigen (ohne Lösch-Buttons)
     renderEvents();
   </script>
 
