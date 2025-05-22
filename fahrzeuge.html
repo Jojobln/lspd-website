@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Fahrzeuge – LSPD</title>
+  <link rel="stylesheet" href="styles.css" />
+  <style>
+    .vehicle {
+      background-color: #1a1a1a;
+      border-radius: 8px;
+      padding: 15px;
+      margin-bottom: 20px;
+      color: white;
+    }
+    .vehicle img {
+      max-width: 100%;
+      height: auto;
+      border-radius: 5px;
+      margin-bottom: 10px;
+    }
+    .vehicle h3 {
+      margin: 0 0 10px 0;
+      color: #00aaff;
+    }
+    .vehicle p {
+      margin: 5px 0;
+    }
+  </style>
+</head>
+<body>
+
+<header class="header">
+  <div class="container nav-container">
+    <h1 class="logo-text">Los Santos Police Department</h1>
+    <div class="hamburger" onclick="toggleMenu()">&#9776;</div>
+    <nav id="nav-menu" class="nav-menu hidden">
+      <ul class="nav-links">
+        <li><a href="../Uniformen/uniformen.html">Uniformen</a></li>
+        <li><a href="../hauptseite/index.html">Startseite</a></li>
+        <li><a href="../Vorschriften/vorschriften.html">Dienstvorschrift</a></li>
+        <li><a href="../Ränge/raenge.html">Ränge</a></li>
+        <li><a href="../Divisions/divisions.html">Divisions</a></li>
+        <li><a href="../Termine/termine.html">Termine</a></li>
+        <li><a href="../News/news.html">News</a></li>>
+      </ul>
+    </nav>
+  </div>
+</header>
+<!-- Verlinkung zur CSS-Datei -->
+<link rel="stylesheet" href="style.css">
+
+<section class="content-section">
+  <h2>Fahrzeuge des LSPD</h2>
+
+  <div id="vehicles-container"></div>
+</section>
+
+<footer class="footer">
+  &copy; 2025 RedState fivePD – Alle Rechte vorbehalten.
+</footer>
+
+<script>
+  function toggleMenu() {
+    document.getElementById("nav-menu").classList.toggle("hidden");
+  }
+
+  // Platzhalter-Fahrzeuge (20 Einträge)
+  const vehicles = [
+    { name: "", division: "", minRank: "", img: "images/placeholder.jpg", description: "" },
+    { name: "", division: "", minRank: "", img: "images/placeholder.jpg", description: "" },
+    { name: "", division: "", minRank: "", img: "images/placeholder.jpg", description: "" },
+    { name: "", division: "", minRank: "", img: "images/placeholder.jpg", description: "" },
+    { name: "", division: "", minRank: "", img: "images/placeholder.jpg", description: "" },
+    { name: "", division: "", minRank: "", img: "images/placeholder.jpg", description: "" },
+    { name: "", division: "", minRank: "", img: "images/placeholder.jpg", description: "" },
+    { name: "", division: "", minRank: "", img: "images/placeholder.jpg", description: "" },
+    { name: "", division: "", minRank: "", img: "images/placeholder.jpg", description: "" },
+    { name: "", division: "", minRank: "", img: "images/placeholder.jpg", description: "" },
+    { name: "", division: "", minRank: "", img: "images/placeholder.jpg", description: "" },
+    { name: "", division: "", minRank: "", img: "images/placeholder.jpg", description: "" },
+    { name: "", division: "", minRank: "", img: "images/placeholder.jpg", description: "" },
+    { name: "", division: "", minRank: "", img: "images/placeholder.jpg", description: "" },
+    { name: "", division: "", minRank: "", img: "images/placeholder.jpg", description: "" },
+    { name: "", division: "", minRank: "", img: "images/placeholder.jpg", description: "" },
+    { name: "", division: "", minRank: "", img: "images/placeholder.jpg", description: "" },
+    { name: "", division: "", minRank: "", img: "images/placeholder.jpg", description: "" },
+    { name: "", division: "", minRank: "", img: "images/placeholder.jpg", description: "" },
+    { name: "", division: "", minRank: "", img: "images/placeholder.jpg", description: "" }
+  ];
+
+  const container = document.getElementById("vehicles-container");
+
+  vehicles.forEach(vehicle => {
+    const div = document.createElement("div");
+    div.classList.add("vehicle");
+
+    div.innerHTML = `
+      <h3>${vehicle.name || "Fahrzeugname"}</h3>
+      <img src="${vehicle.img}" alt="${vehicle.name || 'Fahrzeugbild'}" />
+      <p><strong>Division:</strong> ${vehicle.division || "Keine Angabe"}</p>
+      <p><strong>Fahrbar ab Rang:</strong> ${vehicle.minRank || "Keine Angabe"}</p>
+      <p>${vehicle.description || "Keine Beschreibung vorhanden."}</p>
+    `;
+
+    container.appendChild(div);
+  });
+</script>
+
+</body>
+</html>
