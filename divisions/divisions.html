@@ -4,7 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Divisions – LSPD</title>
-  <link rel="stylesheet" href="style.css" />
+  <link rel="stylesheet" href="/lspd-website/style.css" />
   <style>
     body {
       margin: 0;
@@ -31,13 +31,13 @@
       color: #fff;
       cursor: pointer;
       user-select: none;
-      display: block; /* Hamburger sichtbar auf kleinen Bildschirmen */
+      display: block;
     }
 
     .nav-menu {
       background-color: #1a1a1a;
       padding: 10px;
-      display: none; /* Menü bei kleinen Bildschirmen standardmäßig verstecken */
+      display: none;
     }
 
     .nav-menu.show {
@@ -64,7 +64,6 @@
       text-decoration: underline;
     }
 
-    /* Box Styling für Divisionen */
     .division {
       background-color: #1e1e1e;
       border: 1px solid #333;
@@ -99,7 +98,6 @@
       color: #777;
     }
 
-    /* Responsive Styles */
     @media (min-width: 768px) {
       .nav-menu {
         display: block !important;
@@ -125,13 +123,13 @@
     <div class="hamburger" onclick="toggleMenu()">&#9776;</div>
     <nav id="nav-menu" class="nav-menu">
       <ul class="nav-links">
-<li><a href="uniformen/uniformen.html">Uniformen</a></li>
-<li><a href="fahrzeuge/fahrzeuge.html">Fahrzeuge</a></li>
-<li><a href="vorschriften/vorschriften.html">Dienstvorschrift</a></li>
-<li><a href="raenge/raenge.html">Ränge</a></li>
-<li><a href="index.html">Startseite</a></li>
-<li><a href="termine/termine.html">Termine</a></li>
-<li><a href="news/news.html">News</a></li>
+        <li><a href="/lspd-website/uniformen/uniformen.html">Uniformen</a></li>
+        <li><a href="/lspd-website/fahrzeuge/fahrzeuge.html">Fahrzeuge</a></li>
+        <li><a href="/lspd-website/vorschriften/vorschriften.html">Dienstvorschrift</a></li>
+        <li><a href="/lspd-website/raenge/raenge.html">Ränge</a></li>
+        <li><a href="/lspd-website/index.html">Startseite</a></li>
+        <li><a href="/lspd-website/termine/termine.html">Termine</a></li>
+        <li><a href="/lspd-website/news/news.html">News</a></li>
       </ul>
     </nav>
   </header>
