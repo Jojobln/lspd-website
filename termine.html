@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Termine – LSPD</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background-color: #111;
+      color: #fff;
+    }
+    
+    .header {
+      background-color: #0a0a0a;
+      padding: 20px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    
+    .logo-text {
+      font-size: 22px;
+      color: #00aaff;
+    }
+    
+    .hamburger {
+      font-size: 26px;
+      color: #fff;
+      cursor: pointer;
+    }
+    
+    .nav-menu {
+      background-color: #1a1a1a;
+      padding: 10px;
+    }
+    
+    .hidden {
+      display: none;
+    }
+    
+    .nav-links {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+    
+    .nav-links li {
+      margin: 10px 0;
+    }
+    
+    .nav-links a {
+      color: #00aaff;
+      text-decoration: none;
+    }
+    
+    .nav-links a:hover {
+      text-decoration: underline;
+    }
+    
+    .content-section {
+      padding: 30px 20px;
+    }
+    
+    .division {
+      background-color: #1e1e1e;
+      border: 1px solid #333;
+      padding: 20px;
+      margin-bottom: 20px;
+      border-radius: 8px;
+    }
+    
+    .division h3 {
+      margin-top: 0;
+      color: #00aaff;
+    }
+    
+    .division p {
+      font-size: 16px;
+      line-height: 1.6;
+      color: #fff;
+    }
+    
+    .footer {
+      text-align: center;
+      padding: 20px;
+      background-color: #0a0a0a;
+      color: #777;
+    }
+  </style>
+</head>
+<body>
+
+  <header class="header">
+    <div class="container nav-container">
+      <h1 class="logo-text">Los Santos Police Department</h1>
+      <div class="hamburger" onclick="toggleMenu()">&#9776;</div>
+      <nav id="nav-menu" class="nav-menu hidden">
+        <ul class="nav-links">
+          <li><a href="Uniformen/uniformen.html">Uniformen</a></li>
+          <li><a href="Fahrzeuge/fahrzeuge.html">Fahrzeuge</a></li>
+          <li><a href="Vorschriften/vorschriften.html">Dienstvorschrift</a></li>
+          <li><a href="Ränge/raenge.html">Ränge</a></li>
+          <li><a href="Divisions/divisions.html">Divisions</a></li>
+          <li><a href="hauptseite/index.html">Startseite</a></li>
+          <li><a href="News/news.html">News</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <section class="content-section">
+    <h2>Terminkalender</h2>
+
+    <!-- Login Bereich -->
+    <div id="login-area">
+      <p>Bitte Benutzername und Passwort eingeben:</p>
+      <input type="text" id="usernameInput" placeholder="Benutzername" />
+      <input type="password" id="passwordInput" placeholder="Passwort" />
+      <button onclick="checkLogin()">Einloggen</button>
+      <p id="login-message" style="color:red;"></p>
+    </div>
+
+    <!-- Termine nur sichtbar nach Login -->
+    <div id="protected-content" style="display:none;">
+      <form id="event-form">
+        <label for="date">Datum:</label>
+        <input type="date" id="date" required />
+
+        <label for="time">Uhrzeit:</label>
+        <input type="time" id="time" required />
+
+        <label for="event">Terminbeschreibung:</label>
+        <input type="text" id="event" required />
+
+        <button type="submit">Termin hinzufügen</button>
+      </form>
+    </div>
+
+    <!-- Terminliste (für alle sichtbar) -->
+    <ul id="event-list"></ul>
+  </section>
+
+  <footer class="footer">
+    &copy; 2025 RedState fivePD – Alle Rechte vorbehalten.
+  </footer>
+
+  <script>
+    // Benutzer mit Username + Passwort
+    const users = {
+      "kuura": "chief123",
+      "pringle": "metro2025",
+      "justin": "detective007"
+    };
+
+    let loggedInUser = null;
+
+    function toggleMenu() {
+      document.getElementById("nav-menu").classList.toggle("hidden");
+    }
+
+    // Login prüfen
+    function checkLogin() {
+      const username = document.getElementById("usernameInput").value.trim().toLowerCase();
+      const password = document.getElementById("passwordInput").value;
+      const message = document.getElementById("login-message");
+
+      if (users[username] && users[username] === password) {
+        loggedInUser = username;
+        message.textContent = "";
+        document.getElementById("login-area").style.display = "none";
+        document.getElementById("protected-content").style.display = "block";
+        renderEvents();
+      } else {
+        message.textContent = "Benutzername oder Passwort falsch!";
+      }
+    }
+
+    // Termine speichern (localStorage)
+    let events = JSON.parse(localStorage.getItem("lspdEvents")) || [];
+
+    // Event-Formular
+    const form = document.getElementById("event-form");
+    const eventList = document.getElementById("event-list");
+
+    form?.addEventListener("submit", e => {
+      e.preventDefault();
+      if (!loggedInUser) {
+        alert("Bitte zuerst einloggen!");
+        return;
+      }
+
+      const date = document.getElementById("date").value;
+      const time = document.getElementById("time").value;
+      const eventDesc = document.getElementById("event").value.trim();
+
+      if (!date || !time || !eventDesc) return;
+
+      events.push({ id: Date.now(), date, time, eventDesc });
+      localStorage.setItem("lspdEvents", JSON.stringify(events));
+      form.reset();
+      renderEvents();
+    });
+
+    // Termine anzeigen
+    function renderEvents() {
+      eventList.innerHTML = "";
+
+      if (events.length === 0) {
+        eventList.innerHTML = "<li>Keine Termine vorhanden.</li>";
+        return;
+      }
+
+      events
+        .sort((a, b) => (a.date + a.time).localeCompare(b.date + b.time))
+        .forEach(ev => {
+          const li = document.createElement("li");
+          li.textContent = `${ev.date} ${ev.time} – ${ev.eventDesc}`;
+
+          // Wenn eingeloggt, Löschen-Button hinzufügen
+          if (loggedInUser) {
+            const delBtn = document.createElement("button");
+            delBtn.textContent = "Löschen";
+            delBtn.style.marginLeft = "10px";
+            delBtn.style.cursor = "pointer";
+            delBtn.onclick = () => deleteEvent(ev.id);
+            li.appendChild(delBtn);
+          }
+          eventList.appendChild(li);
+        });
+    }
+
+    // Termin löschen
+    function deleteEvent(id) {
+      if (!loggedInUser) return;
+      events = events.filter(ev => ev.id !== id);
+      localStorage.setItem("lspdEvents", JSON.stringify(events));
+      renderEvents();
+    }
+
+    // Termine auch vor Login anzeigen (ohne Löschen)
+    renderEvents();
+  </script>
+
+</body>
+</html>

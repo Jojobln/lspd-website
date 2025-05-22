@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Uniformen – LSPD</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background-color: #111;
+      color: #ccc;
+    }
+    
+    .header {
+      background-color: #0a0a0a;
+      padding: 20px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    
+    .logo-text {
+      font-size: 22px;
+      color: #00aaff;
+    }
+    
+    .hamburger {
+      font-size: 26px;
+      color: #fff;
+      cursor: pointer;
+      user-select: none;
+      display: block;
+    }
+    
+    .nav-menu {
+      background-color: #1a1a1a;
+      padding: 10px;
+    }
+    
+    .hidden {
+      display: none !important;
+    }
+    
+    .nav-links {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+    
+    .nav-links li {
+      margin: 10px 0;
+    }
+    
+    .nav-links a {
+      color: #00aaff;
+      text-decoration: none;
+      font-weight: bold;
+    }
+    
+    .nav-links a:hover {
+      text-decoration: underline;
+    }
+    
+    /* Responsive Menü */
+    @media (min-width: 768px) {
+      .nav-menu {
+        display: block !important;
+        background: none;
+        padding: 0;
+      }
+      .hamburger {
+        display: none;
+      }
+      .nav-links {
+        display: flex;
+      }
+      .nav-links li {
+        margin: 0 15px;
+      }
+    }
+    
+    .content-section {
+      padding: 30px 20px;
+      max-width: 1000px;
+      margin: 0 auto;
+    }
+    
+    /* Division Boxen */
+    .division {
+      background-color: #1e1e1e;
+      border: 1px solid #333;
+      padding: 20px;
+      margin-bottom: 30px;
+      border-radius: 6px;
+    }
+    
+    .division h3 {
+      color: #00aaff;
+      margin-top: 0;
+    }
+    
+    .division p {
+      font-size: 16px;
+      line-height: 1.6;
+      color: #fff;
+    }
+    
+    /* Uniform Layout */
+    .uniform {
+      margin-top: 15px;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+    
+    .uniform img {
+      max-width: 100%;
+      height: auto;
+      border-radius: 4px;
+      border: 1px solid #444;
+      /* Für einheitliche Höhe, falls gewünscht:
+      height: 200px;
+      object-fit: cover;
+      */
+    }
+    
+    .uniform-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+      gap: 20px;
+      margin-top: 15px;
+    }
+    
+    /* Footer */
+    .footer {
+      text-align: center;
+      padding: 20px;
+      background-color: #0a0a0a;
+      color: #777;
+    }
+  </style>
+</head>
+<body>
+
+  <header class="header">
+    <div class="container nav-container">
+      <h1 class="logo-text">Los Santos Police Department</h1>
+      <div class="hamburger" onclick="toggleMenu()" aria-label="Navigation umschalten" role="button" tabindex="0">&#9776;</div>
+      <nav id="nav-menu" class="nav-menu hidden">
+        <ul class="nav-links">
+          <li><a href="hauptseite/index.html">Startseite</a></li>
+          <li><a href="Fahrzeuge/fahrzeuge.html">Fahrzeuge</a></li>
+          <li><a href="Vorschriften/vorschriften.html">Dienstvorschrift</a></li>
+          <li><a href="Ränge/raenge.html">Ränge</a></li>
+          <li><a href="Divisions/divisions.html">Divisions</a></li>
+          <li><a href="Termine/termine.html">Termine</a></li>
+          <li><a href="News/news.html">News</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <div class="content-section">
+    <h2>Uniformen nach Division</h2>
+
+    <!-- Patrol Unit -->
+    <div class="division">
+      <h3>Patrol Unit</h3>
+      <div class="uniform">
+        <img src="bilder/patrol1.jpg" alt="Patrol Uniform" />
+        <p>Standard-Streifenuniform mit taktischer Weste. Getragen im regulären Streifendienst.</p>
+      </div>
+    </div>
+
+    <!-- Traffic Unit -->
+    <div class="division">
+      <h3>Traffic Unit</h3>
+      <div class="uniform">
+        <img src="bilder/traffic1.jpg" alt="Traffic Uniform" />
+        <p>Helle Jacke mit reflektierenden Elementen für hohe Sichtbarkeit im Straßenverkehr.</p>
+      </div>
+    </div>
+
+    <!-- Detective Bureau -->
+    <div class="division">
+      <h3>Detective Bureau</h3>
+      <div class="uniform">
+        <img src="bilder/detective1.jpg" alt="Detective Outfit" />
+        <p>Schlichte zivile Kleidung mit Abzeichen am Gürtel. Getragen bei verdeckten Einsätzen.</p>
+      </div>
+    </div>
+
+    <!-- Air Support Unit -->
+    <div class="division">
+      <h3>Air Support Unit</h3>
+      <div class="uniform">
+        <img src="bilder/air1.jpg" alt="Air Support Uniform" />
+        <p>Fluganzug mit Helm, speziell angepasst für Luftoperationen und Sichtsignale.</p>
+      </div>
+    </div>
+
+    <!-- Metropolitan Division (4 Uniformen) -->
+    <div class="division">
+      <h3>Metropolitan Division</h3>
+      <div class="uniform-grid">
+        <div class="uniform">
+          <img src="bilder/metro1.jpg" alt="Metro Uniform 1" />
+          <p>Standard-Taktikuniform mit Körperschutz.</p>
+        </div>
+        <div class="uniform">
+          <img src="bilder/metro2.jpg" alt="Metro Uniform 2" />
+          <p>Schwere Schutzkleidung für Risikoeinsätze (SWAT).</p>
+        </div>
+        <div class="uniform">
+          <img src="bilder/metro3.jpg" alt="Metro Uniform 3" />
+          <p>Trainingsoutfit für taktische Übungen und Fortbildungen.</p>
+        </div>
+        <div class="uniform">
+          <img src="bilder/metro4.jpg" alt="Metro Uniform 4" />
+          <p>Zivile Undercover-Kleidung für spezielle Operationen.</p>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <footer class="footer">
+    &copy; 2025 RedState fivePD – Alle Rechte vorbehalten.
+  </footer>
+
+  <script>
+    function toggleMenu() {
+      document.getElementById("nav-menu").classList.toggle("hidden");
+    }
+
+    // Tastaturbedienung für Hamburger-Menü
+    const hamburger = document.querySelector('.hamburger');
+    hamburger.addEventListener('keydown', function(e) {
+      if (e.key === 'Enter' || e.key === ' ') {
+        e.preventDefault();
+        toggleMenu();
+      }
+    });
+  </script>
+
+</body>
+</html>
