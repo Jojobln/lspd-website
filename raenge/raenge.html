@@ -2,7 +2,7 @@
 <html lang="de">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Ränge – LSPD</title>
   <style>
     body {
@@ -11,58 +11,115 @@
       background-color: #111;
       color: #fff;
     }
-    
+
     .header {
       background-color: #0a0a0a;
       padding: 20px;
       display: flex;
       align-items: center;
       justify-content: space-between;
+      position: relative;
     }
-    
+
     .logo-text {
       font-size: 22px;
       color: #00aaff;
     }
-    
+
     .hamburger {
-      font-size: 26px;
+      font-size: 28px;
       color: #fff;
       cursor: pointer;
+      display: block;
+      user-select: none;
+      z-index: 101;
     }
-    
-    .nav-menu {
+
+    nav.nav-menu {
       background-color: #1a1a1a;
-      padding: 10px;
+      position: absolute;
+      top: 100%;
+      right: 0;
+      width: 220px;
+      border-radius: 0 0 8px 8px;
+      overflow: hidden;
+      max-height: 0;
+      transition: max-height 0.3s ease-out;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.7);
+      z-index: 100;
     }
-    
-    .hidden {
-      display: none;
+
+    nav.nav-menu.open {
+      max-height: 1000px;
+      transition: max-height 0.5s ease-in;
     }
-    
+
     .nav-links {
       list-style: none;
-      padding: 0;
+      padding: 10px 0;
       margin: 0;
     }
-    
+
     .nav-links li {
-      margin: 10px 0;
+      margin: 0;
     }
-    
+
     .nav-links a {
+      display: block;
+      padding: 12px 20px;
       color: #00aaff;
       text-decoration: none;
+      font-weight: bold;
+      border-bottom: 1px solid #222;
+      transition: background-color 0.2s ease;
     }
-    
+
     .nav-links a:hover {
-      text-decoration: underline;
+      background-color: #003f5c;
+      text-decoration: none;
     }
-    
+
+    @media (min-width: 768px) {
+      .hamburger {
+        display: none;
+      }
+
+      nav.nav-menu {
+        position: static;
+        max-height: none !important;
+        background: none;
+        width: auto;
+        box-shadow: none;
+        border-radius: 0;
+      }
+
+      .nav-links {
+        display: flex;
+        gap: 25px;
+        padding: 0;
+      }
+
+      .nav-links li {
+        margin: 0;
+      }
+
+      .nav-links a {
+        padding: 0;
+        border: none;
+      }
+
+      .nav-links a:hover {
+        background: none;
+        text-decoration: underline;
+      }
+    }
+
     .content-section {
       padding: 30px 20px;
+      max-width: 900px;
+      margin: 0 auto;
     }
-    
+
     .division {
       background-color: #1e1e1e;
       border: 1px solid #333;
@@ -70,18 +127,18 @@
       margin-bottom: 20px;
       border-radius: 8px;
     }
-    
+
     .division h3 {
       margin-top: 0;
       color: #00aaff;
     }
-    
+
     .division p {
       font-size: 16px;
       line-height: 1.6;
       color: #fff;
     }
-    
+
     .footer {
       text-align: center;
       padding: 20px;
@@ -93,21 +150,19 @@
 <body>
 
   <header class="header">
-    <div class="container nav-container">
-      <h1 class="logo-text">Los Santos Police Department</h1>
-      <div class="hamburger" onclick="toggleMenu()">&#9776;</div>
-      <nav id="nav-menu" class="nav-menu hidden">
-        <ul class="nav-links">
-            <li><a href="uniformen/uniformen.html">Uniformen</a></li>
-            <li><a href="fahrzeuge/fahrzeuge.html">Fahrzeuge</a></li>
-            <li><a href="vorschriften/vorschriften.html">Dienstvorschrift</a></li>
-            <li><a href="index.html">Startseite</a></li>
-            <li><a href="divisions/divisions.html">Divisions</a></li>
-            <li><a href="termine/termine.html">Termine</a></li>
-            <li><a href="news/news.html">News</a></li>
-        </ul>
-      </nav>
-    </div>
+    <h1 class="logo-text">Los Santos Police Department</h1>
+    <div class="hamburger" id="hamburger">&#9776;</div>
+    <nav id="nav-menu" class="nav-menu">
+      <ul class="nav-links">
+        <li><a href="/lspd-website/uniformen/uniformen.html">Uniformen</a></li>
+        <li><a href="/lspd-website/fahrzeuge/fahrzeuge.html">Fahrzeuge</a></li>
+        <li><a href="/lspd-website/vorschriften/vorschriften.html">Dienstvorschrift</a></li>
+        <li><a href="/lspd-website/raenge/raenge.html">Ränge</a></li>
+        <li><a href="/lspd-website/divisions/divisions.html">Divisions</a></li>
+        <li><a href="/lspd-website/termine/termine.html">Termine</a></li>
+        <li><a href="/lspd-website/index.html">Startseite</a></li>
+      </ul>
+    </nav>
   </header>
 
   <section class="content-section">
@@ -178,9 +233,20 @@
   </footer>
 
   <script>
-    function toggleMenu() {
-      document.getElementById("nav-menu").classList.toggle("hidden");
-    }
+    const hamburger = document.getElementById('hamburger');
+    const navMenu = document.getElementById('nav-menu');
+
+    hamburger.addEventListener('click', () => {
+      navMenu.classList.toggle('open');
+    });
+
+    document.querySelectorAll('.nav-links a').forEach(link => {
+      link.addEventListener('click', () => {
+        if (window.innerWidth < 768) {
+          navMenu.classList.remove('open');
+        }
+      });
+    });
   </script>
 
 </body>
