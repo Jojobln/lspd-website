@@ -36,7 +36,7 @@
     .nav-menu {
       background-color: #1a1a1a;
       padding: 10px;
-      display: none; /* versteckt das Menü auf kleinen Bildschirmen */
+      display: none;
     }
 
     .nav-menu.show {
@@ -100,7 +100,6 @@
       color: #777;
     }
 
-    /* Größere Bildschirme */
     @media (min-width: 768px) {
       .nav-menu {
         display: block !important;
@@ -126,13 +125,13 @@
   <div class="hamburger" onclick="toggleMenu()">&#9776;</div>
   <nav id="nav-menu" class="nav-menu">
     <ul class="nav-links">
-      <li><a href="uniformen/uniformen.html">Uniformen</a></li>
-      <li><a href="index.html">Startseite</a></li>
-      <li><a href="vorschriften/vorschriften.html">Dienstvorschrift</a></li>
-      <li><a href="raenge/raenge.html">Ränge</a></li>
-      <li><a href="divisions/divisions.html">Divisions</a></li>
-      <li><a href="termine/termine.html">Termine</a></li>
-      <li><a href="news/news.html">News</a></li>
+      <li><a href="/lspd-website/uniformen/uniformen.html">Uniformen</a></li>
+      <li><a href="/lspd-website/index.html">Startseite</a></li>
+      <li><a href="/lspd-website/vorschriften/vorschriften.html">Dienstvorschrift</a></li>
+      <li><a href="/lspd-website/raenge/raenge.html">Ränge</a></li>
+      <li><a href="/lspd-website/divisions/divisions.html">Divisions</a></li>
+      <li><a href="/lspd-website/termine/termine.html">Termine</a></li>
+      <li><a href="/lspd-website/news/news.html">News</a></li>
     </ul>
   </nav>
 </header>
@@ -152,10 +151,28 @@
   }
 
   const vehicles = [
-    { name: "Patrol Cruiser", division: "Patrol Unit", minRank: "Officer", img: "images/patrol_cruiser.jpg", description: "Standard Streifenwagen für den Streifendienst." },
-    { name: "Detective Sedan", division: "Detective Bureau", minRank: "Detective", img: "images/detective_sedan.jpg", description: "Unauffälliges Fahrzeug für Ermittler." },
-    { name: "SWAT Truck", division: "Metropolitan Division", minRank: "Sergeant", img: "images/swat_truck.jpg", description: "Spezialfahrzeug für taktische Einsätze." },
-    // Mehr Fahrzeuge hinzufügen...
+    {
+      name: "Patrol Cruiser",
+      division: "Patrol Unit",
+      minRank: "Officer",
+      img: "/lspd-website/images/patrol_cruiser.jpg",
+      description: "Standard Streifenwagen für den Streifendienst."
+    },
+    {
+      name: "Detective Sedan",
+      division: "Detective Bureau",
+      minRank: "Detective",
+      img: "/lspd-website/images/detective_sedan.jpg",
+      description: "Unauffälliges Fahrzeug für Ermittler."
+    },
+    {
+      name: "SWAT Truck",
+      division: "Metropolitan Division",
+      minRank: "Sergeant",
+      img: "/lspd-website/images/swat_truck.jpg",
+      description: "Spezialfahrzeug für taktische Einsätze."
+    }
+    // Weitere Fahrzeuge...
   ];
 
   const container = document.getElementById("vehicles-container");
