@@ -5,7 +5,6 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Dienstvorschrift – LSPD</title>
   <style>
-    /* Grundfarben und Schrift */
     body {
       margin: 0;
       font-family: Arial, sans-serif;
@@ -13,7 +12,6 @@
       color: #ccc;
     }
 
-    /* Header mit Navigation */
     header {
       background-color: #2c3e50;
       padding: 15px 20px;
@@ -29,75 +27,66 @@
       user-select: none;
     }
 
-    /* Navigation */
     nav {
       position: relative;
     }
+
     nav ul {
       list-style: none;
       margin: 0;
       padding: 0;
+      position: absolute;
+      right: 0;
+      top: 100%;
+      background-color: #2c3e50;
+      border-radius: 4px;
+      width: 200px;
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.5);
+      display: none; /* Standard: versteckt */
+      flex-direction: column;
+      z-index: 1000;
+    }
+
+    nav ul.visible {
       display: flex;
-      gap: 20px;
     }
+
     nav li {
-      display: inline;
+      padding: 10px 20px;
+      border-bottom: 1px solid #3e5368;
     }
+
+    nav li:last-child {
+      border-bottom: none;
+    }
+
     nav a {
       color: white;
       text-decoration: none;
       font-weight: bold;
-      padding: 6px 12px;
-      border-radius: 5px;
-      transition: background-color 0.3s ease;
-      display: inline-block;
+      display: block;
     }
+
     nav a:hover,
     nav a:focus {
       background-color: #34495e;
-      outline: none;
+      border-radius: 4px;
     }
 
-    /* Hamburger-Button für kleine Bildschirme */
     .hamburger {
-      display: none;
+      display: block;
       font-size: 28px;
       color: white;
       cursor: pointer;
       user-select: none;
     }
 
-    /* Mobil-Menü (hidden by default) */
-    @media (max-width: 767px) {
-      nav ul {
-        display: none;
-        flex-direction: column;
-        background-color: #2c3e50;
-        position: absolute;
-        right: 0;
-        top: 100%;
-        width: 180px;
-        border-radius: 4px;
-        padding: 10px 0;
-        box-shadow: 0 2px 6px rgba(0,0,0,0.5);
-        z-index: 1000;
-      }
-      nav ul.show {
-        display: flex;
-      }
-      .hamburger {
-        display: block;
-      }
-    }
-
-    /* Content */
     .content-section {
       padding: 30px 20px;
       max-width: 800px;
       margin: 0 auto;
     }
 
-    /* Passwort-Input */
     #login-area input[type="password"] {
       padding: 8px;
       font-size: 16px;
@@ -107,6 +96,7 @@
       width: 180px;
       max-width: 100%;
     }
+
     #login-area button {
       background-color: #00aaff;
       border: none;
@@ -117,13 +107,13 @@
       cursor: pointer;
       transition: background-color 0.3s ease;
     }
+
     #login-area button:hover,
     #login-area button:focus {
       background-color: #0088cc;
       outline: none;
     }
 
-    /* Footer */
     .footer {
       text-align: center;
       padding: 20px;
@@ -139,14 +129,14 @@
   <div class="logo-text">Los Santos Police Department</div>
   <div class="hamburger" tabindex="0" aria-label="Navigation umschalten" role="button">&#9776;</div>
   <nav>
-    <ul id="nav-menu">
-      <li><a href="uniformen/uniformen.html">Uniformen</a></li>
-      <li><a href="fahrzeuge/fahrzeuge.html">Fahrzeuge</a></li>
-      <li><a href="index.html">Startseite</a></li>
-      <li><a href="raenge/raenge.html">Ränge</a></li>
-      <li><a href="divisions/divisions.html">Divisions</a></li>
-      <li><a href="termine/termine.html">Termine</a></li>
-      <li><a href="news/news.html">News</a></li>
+    <ul id="nav-menu" role="menu">
+      <li role="none"><a role="menuitem" href="uniformen/uniformen.html">Uniformen</a></li>
+      <li role="none"><a role="menuitem" href="fahrzeuge/fahrzeuge.html">Fahrzeuge</a></li>
+      <li role="none"><a role="menuitem" href="index.html">Startseite</a></li>
+      <li role="none"><a role="menuitem" href="raenge/raenge.html">Ränge</a></li>
+      <li role="none"><a role="menuitem" href="divisions/divisions.html">Divisions</a></li>
+      <li role="none"><a role="menuitem" href="termine/termine.html">Termine</a></li>
+      <li role="none"><a role="menuitem" href="news/news.html">News</a></li>
     </ul>
   </nav>
 </header>
@@ -182,22 +172,21 @@
 </footer>
 
 <script>
-  // Hamburger-Menü toggeln
   const hamburger = document.querySelector('.hamburger');
   const navMenu = document.getElementById('nav-menu');
 
   function toggleMenu() {
-    navMenu.classList.toggle('show');
+    navMenu.classList.toggle('visible');
   }
+
   hamburger.addEventListener('click', toggleMenu);
-  hamburger.addEventListener('keydown', e => {
+  hamburger.addEventListener('keydown', (e) => {
     if (e.key === 'Enter' || e.key === ' ') {
       e.preventDefault();
       toggleMenu();
     }
   });
 
-  // Passwort-Prüfung
   function checkPassword() {
     const correctPassword = "lspd2025";
     const input = document.getElementById("passwordInput").value;
